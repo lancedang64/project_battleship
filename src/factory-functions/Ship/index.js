@@ -1,4 +1,4 @@
-export default function ShipFactory(name, length) {
+export default function Ship(name, length) {
 	let shipState = [];
 
 	function _setInitialShipState() {
