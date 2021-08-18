@@ -1,7 +1,11 @@
 import { expect, test } from '@jest/globals';
 import Ship from './index';
 
-const stubShip = Ship('Submarrine', 3);
+let stubShip = Ship('Submarrine', 3);
+
+beforeEach(() => {
+	return (stubShip = Ship('Submarrine', 3));
+});
 
 describe('hit() method', () => {
 	test('updates shipState', () => {
@@ -26,5 +30,16 @@ describe('getSunkStatus() method', () => {
 		stubShip.hit(1);
 		stubShip.hit(2);
 		expect(stubShip.getSunkStatus()).toBeTruthy();
+	});
+});
+
+describe('shipState property', () => {
+	test('shows correct initial state', () => {
+		expect(stubShip.shipState).toEqual(['safe', 'safe', 'safe']);
+	});
+
+	test('shows correct state when ship is hit', () => {
+		stubShip.hit(2);
+		expect(stubShip.shipState).toEqual(['safe', 'safe', 'hit']);
 	});
 });
