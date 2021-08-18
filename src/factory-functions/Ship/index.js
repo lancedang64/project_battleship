@@ -11,8 +11,11 @@ export default function ShipFactory(name, length) {
 	_setInitialShipState();
 
 	function hit(position) {
+		if (!Number.isInteger(position)) return;
 		if (position >= length || position < 0) return;
+		if (shipState[position] === 'hit') return 'that position is already hit';
 		shipState[position] = 'hit';
+		return `hit successful at position ${position}`;
 	}
 
 	function getSunkStatus() {
